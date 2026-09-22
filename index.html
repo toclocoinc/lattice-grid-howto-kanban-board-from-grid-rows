@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to build a kanban board from the same rows as a grid</title>
+    <meta
+      name="description"
+      content="A grid of twelve tasks sits above a kanban board built from those same rows. Drag a card to another column and the grid's Status cell changes with it; filter either one and both narrow together. Built with Lattice Grid loaded by script tag, no install and no build."
+    />
+    <link rel="icon" href="data:," />
+    <!--
+      The grid's stylesheet, from jsDelivr. The address names the exact
+      release, 1.68.2, and carries the hash of the file it expects, so the
+      page can never quietly pick up a different build than the one it was
+      checked against.
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@toclocoinc/lattice-grid@1.68.2/lattice-grid.min.css"
+      integrity="sha384-mcpd7S8C5nz58bZDAXdYH6rzezEhfN7B4u2SlW426dSe20GnkxTu4TygyOILnCth"
+      crossorigin="anonymous"
+    />
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; background: #f4f6f9; color: #131a24; }
+      header { padding: 1.5rem 1.5rem 0.5rem; max-width: 960px; margin: 0 auto; }
+      header p { color: #4a5568; }
+      header a { color: #2d6bff; }
+      main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 2.5rem; }
+      #toolbar { margin: 0 0 0.75rem; }
+      #quick { font: inherit; padding: 0.4rem 0.75rem; border: 1px solid #ccd3dc; border-radius: 4px; width: 240px; }
+      #grid { height: 280px; margin-bottom: 1rem; }
+      #board { height: 420px; }
+      .caveats { font-size: 0.9rem; color: #4a5568; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>How to build a kanban board from the same rows as a grid</h1>
+      <p>
+        Twelve tasks sit in the grid below; the board underneath reads and writes through that
+        same grid rather than a copy. Drag a card to another column and the grid's Status cell
+        changes with it. Type in the box and both the grid and the board narrow to the match. Read
+        the
+        <a href="https://www.latticegrid.dev/docs/how-to/kanban-board-from-grid-rows/">full how-to</a>
+        on latticegrid.dev.
+      </p>
+    </header>
+    <main>
+      <div id="toolbar">
+        <input id="quick" type="search" placeholder="Filter tasks…" aria-label="Filter tasks" />
+      </div>
+      <div id="grid"></div>
+      <div id="board"></div>
+      <p class="caveats">
+        Two things to know: the columns appear in the order they are declared, not the order
+        statuses happen to occur in the data; and a card can carry a rule of its own, here a veto
+        that refuses to move an unowned task into Done.
+      </p>
+    </main>
+
+    <!--
+      The library and the kanban module, as classic script tags. No npm
+      install, no bundler, no type="module": each file runs as it arrives.
+      The kanban module defines its own LatticeGridKanban global rather than
+      extending LatticeGrid, so it can load in either order, but after the
+      core makes more sense to read.
+    -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@toclocoinc/lattice-grid@1.68.2/lattice-grid.min.js"
+      integrity="sha384-vCzLyFYn0T0lz/vkdH4x0JpJZkOazZgI2LiGui7lm5uerdZd0Z46G9hr3Aq1FFPS"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@toclocoinc/lattice-grid@1.68.2/modules/kanban.min.js"
+      integrity="sha384-tDh16gPrK1ZZ0EIdgyb320WNVyZpssh+D/MlMEscUngs1J6jZ8M/BOPN0CrFu+nu"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./demo.js"></script>
+  </body>
+</html>
